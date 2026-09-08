@@ -1,43 +1,64 @@
 ---
 name: write-requirement-doc
-description: Write professional Chinese product requirement documents and requirement specifications according to the user's provided PRD template. Use when the user asks to write, polish, structure, supplement, or review a requirement document, feature requirement, business requirement, functional rule, product plan, or demand analysis in Chinese, especially for education/training/course/exam platform features.
+description: 撰写、补充和审查中文产品需求文档及功能规则，遵循用户模板，逐页逐区块说明展示与交互，并明确业务规则、状态、权限、异常和验收条件，供开发与测试直接使用。适用于基于业务说明、原型或已有文档编写 PRD，以及修复需求颗粒度不足、规则遗漏和跨文档冲突。
 ---
 
-# Requirement Document Writing
+# 中文需求文档撰写
 
-Use this skill to produce Chinese requirement documents that follow the user's template standard.
+交付目标：开发能够根据文档确定应实现的行为，测试能够根据相同条件确定通过或失败；未确定的业务决定有明确边界。沿用用户的文档结构和术语，不用篇幅、表格数量或章节齐全代替规则完整。
 
-## Core Workflow
+## 完成标准
 
-1. Identify the requirement type before writing:
-   - 页面字段新增/字段调整
-   - 流程型需求
-   - 多状态/多场景规则型需求
-   - 列表管理型需求
-   - 数据统计型需求
-   - 页面展示型需求
-   - 权限/审核/申诉/配置类需求
-2. Build the document around one clear main requirement. Split it into functional points by business sequence; if there is no sequence, order by priority.
-3. For each main requirement, write:
-   - 需求背景: current state, pain point, missing capability, affected role/scenario.
-   - 需求目标: intended business result and user value.
-   - 业务流程: include only when the process matters.
-   - 详细需求说明: function path, rules, field/table/status/query/action constraints.
-4. Before functional rules, always state the function path, for example: `功能路径：管理端-考试管理-成绩申诉`.
-5. Write rules in the order users or systems encounter them: page display first, then operation entry, validation, state change, result feedback, notifications, records/statistics.
-6. Prefer tables for structured constraints: fields, permissions, statuses, query conditions, list columns, editability, operation buttons, statistics formulas.
-7. Use precise product language. Avoid vague words like "支持一下", "优化", "相关", "等等" unless followed by explicit scope and rules.
-8. If source information is incomplete, fill reasonable product assumptions and mark them as `待业务确认` instead of blocking the draft.
+- 页面按“页面 → 区块 → 内容与交互 → 处理结果”逐层展开；页签、弹窗、抽屉和二级页面同样需要说明。不得把“展示回款计划”“支持编辑”“记录动态”当作详细规则。
+- 每个业务操作说明角色与前置条件、触发与输入、判断条件、处理结果、数据及状态变化、用户反馈，以及适用的失败与恢复行为。纯展示区块不强加业务操作。
+- 枚举给出当前范围内的完整选项；有边界的规则明确范围与端点；状态变化、关联影响和关键计算可以逐条判定。示例不能代替规则定义。
+- 关键规则能定位、能对应验收场景；不让开发或测试自行选择业务口径。无法确定的关键规则就地标明待确认，不能把有关键缺口的部分宣称为可直接开发验收。
+- 只细化当前范围内的功能。例子中的角色、金额、期限、状态、字段和页面布局不自动成为其他项目的规则。
 
-## Template Reference
+## 工作流程
 
-When writing a full requirement document or detailed functional rules, read `references/template-standard.md`.
+### 1. 确定依据与范围
 
-## Output Style
+复用用户已明确的要求、修正和批准；读取相关原型、文档和现有资料。基于原型写作时，核对实际可取得的页面、入口及状态，不能仅凭页面名称推测；未能读取或未体现的部分如实说明。
 
-- Write in Simplified Chinese.
-- Keep numbering hierarchical and stable: `1`, `1.1`, `1.1.1`.
-- Use "规则如下：" before numbered rule lists.
-- Use full-width Chinese punctuation in prose.
-- Use tables when the template standard calls for them.
-- Include a final `待确认问题` section when business policy, thresholds, roles, deadlines, or exception handling are uncertain.
+区分：用户已确认规则、资料中可观察事实、建议方案、待确认决定。原型表现不自动证明后台校验或业务口径正确；与用户最新明确要求冲突时按用户要求写，注明需要同步的资料。其他来源冲突不得静默任选一套。
+
+低影响、可逆的展示细节在任务授权范围内给出一套明确、可实施的建议，集中注明即可，不将每个未提供的文案、排版或常规加载状态变成待确认阻塞。沿用已有约定；用户明确保留决定权或选择会实质改变结果时再列待确认。涉及权限、金额、审批、数据归属、删除或历史口径的缺口不得伪装成确定规则。必要时提出聚焦问题，同时继续不依赖答案的部分。不得把沉默当作确认，也不为普通写作增加阶段审批。
+
+### 2. 建立覆盖清单
+
+识别并组合适用类型：页面/表单、列表管理、流程/多状态、权限/配置、统计。根据业务顺序梳理角色、对象、页面、区块、子界面、操作和关联模块。
+
+用简短工作清单对应文档落点：`页面或流程｜区块或动作｜适用状态｜依据｜规则位置/缺口`。完整文档及多页面任务须逐项核对，清单可留在工作过程中，不强制作为额外交付文件。小改动仅检查涉及位置及关联规则，不扩写无关页面。
+
+### 3. 按类型读取参考并展开
+
+- 完整文档、详细功能说明：读取 [模板标准](references/template-standard.md)，保留用户的目录与文档拆分要求。
+- 涉及任何页面或区块（包括管理页、详情、列表、表单、弹窗）：读取 [页面与区块规范](references/page-specification.md)，逐区块展开，不只用于展示型网站。
+- 涉及字段校验、操作、状态、权限、配置、批量处理或统计：读取 [业务规则规范](references/business-rules.md) 中适用部分，可组合使用，不机械加入全部规则。
+- 首次按本 Skill 写详细需求、用户强调颗粒度或要求补写过粗内容时：读取 [颗粒度对照示例](references/granularity-examples.md)，参考表达深度，不复制示例业务决定。
+- 交付前或审查需求时：读取 [交付检查与验收](references/quality-gate.md)，完成适用检查并修复已发现缺口。
+
+复杂需求按业务顺序组织功能点；页面内部按实际阅读和操作顺序描述。无需页面的后台流程或统计口径按对象、事件和结果组织，不编造页面。
+
+### 4. 管理关联与变更
+
+同一业务口径指定明确的定义位置，其他位置使用精确引用。引用应说明具体规则及本入口的差异，不能用“详见其他文档”省略当前区块的字段、展示或交互。多入口操作不得产生未说明的不同规则。
+
+用户修正术语、字段、权限、状态或范围后，检查相关正文、表格、动态文案、示例、验收和跨文档引用。授权范围内同步修改文档；原型或代码的差异列明，只有任务授权包含修改时才实施。
+
+### 5. 检查后交付
+
+按覆盖清单检查每个区块和动作，再检查条件能否判定、结果能否观察、不同章节是否一致。对关键规则补充验收场景，明确正常、拒绝、边界及适用异常的预期结果。
+
+发现资料已足以确定的缺口，直接补齐。待确认项就地标注并在文末集中列出：编号、缺失决定、依据/建议、影响规则及阻塞的开发或验收范围；列出可独立推进部分。没有未确定事项则不生成空的待确认章节。
+
+持续完成当前授权范围内的文档与必要复核，不因篇幅长要求用户发送“继续”。交付简述完成内容及实际剩余缺口，不把一次检查或示例试写等同于未来所有文档必然完整。
+
+## 输出约定
+
+- 使用简体中文、产品语言和稳定的层级编号，如 `3.1.4.1`。功能规则前写 `功能路径：端－模块－页面`；后台事件可写实际业务入口，不虚构菜单。
+- 沿用用户模板中的背景、目标、业务流程（适用时）、详细需求说明。编号规则列表前写“规则如下：”；结构化约束用表格，完整操作用顺序规则，必要时用流程图、状态表或页面正文示例。
+- 关键规则使用章节＋条款编号，或简短稳定的规则 ID；验收准确引用。修订时尽量保留已有编号。
+- 使用确定术语。不得以“相关”“等等”“按权限”“适当提示”“与新增一致”等概括代替必要定义；确实相同的规则可精确引用。
+- PRD 描述业务输入、输出、行为与约束。除非用户另有要求，不输出实现代码，不擅自指定数据库结构、接口路径、框架或技术方案；技术资源中的信息转写为产品规则。

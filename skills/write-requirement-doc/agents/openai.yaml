@@ -1,7 +1,7 @@
 interface:
-  display_name: "需求文档写作"
-  short_description: "按照用户模板撰写专业中文需求说明书"
-  default_prompt: "Use $write-requirement-doc to 按照我的需求文档标准，基于以下业务需求撰写一份专业需求说明书："
+  display_name: "中文需求文档编写"
+  short_description: "按用户模板逐页逐区块细化中文需求，写清业务规则与验收条件，供开发测试使用"
+  default_prompt: "使用 $write-requirement-doc，按我的模板和已确认需求逐页逐区块撰写完整需求文档，明确展示、交互、业务规则及验收条件，并标出影响实施的待确认事项。"
 
 policy:
   allow_implicit_invocation: true
